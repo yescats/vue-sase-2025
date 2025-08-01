@@ -10,7 +10,7 @@ export function useLogout() {
         }
 
         AuthService.removeAuth()
-        router.push('login')
+        router.push('user/login')
     }
 
     return logout

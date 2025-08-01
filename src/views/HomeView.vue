@@ -4,5 +4,7 @@ import Navigation from '@/components/Navigation.vue';
 
 <template>
   <Navigation />
-  
+  <h2>
+    This is the home page
+  </h2>
 </template>

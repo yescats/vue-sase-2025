@@ -33,7 +33,7 @@ const logout = useLogout()
                     </template>
                     <template v-else>
                         <li class="nav-item">
-                            <RouterLink class="nav-link" to="/login">
+                            <RouterLink class="nav-link" to="/user/login">
                                 <i class="fa-solid fa-right-to-bracket"></i> Login
                             </RouterLink>
                         </li>
