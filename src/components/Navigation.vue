@@ -7,11 +7,12 @@ const logout = useLogout()
 </script>
 
 <template>
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary mb-3">
         <div class="container">
-            <RouterLink class="navbar-brand" to="/">
+            <a class="navbar-brand">
                 <i class="fa-solid fa-campground"></i> YEY
-            </RouterLink>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -45,9 +46,12 @@ const logout = useLogout()
                     </li>
                 </ul>
                 <span class="navbar-text" v-if="AuthService.hasAuth()">
-                    <i class="fa-solid fa-user"></i> {{ AuthService.getUser() }}
+                    <RouterLink class="nav-link" to="/user/me">
+                        <i class="fa-solid fa-user"></i> {{ AuthService.getUser() }}
+                    </RouterLink>
                 </span>
             </div>
         </div>
     </nav>
+    
 </template>

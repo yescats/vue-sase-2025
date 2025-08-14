@@ -32,6 +32,10 @@ export class AuthService {
         return this.getAuth().name
     }
 
+    static getEmail(): string {
+        return this.getAuth().email
+    }
+
     static removeAuth() {
         localStorage.removeItem(this.STORAGE_KEY)
     }

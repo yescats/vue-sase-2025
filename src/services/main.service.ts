@@ -7,13 +7,15 @@ const client = axios.create({
         'Accept': 'application/json'
     },
     validateStatus: (status: number) => {
-        return status === 200
+        return status >= 200 && status < 300
     }
 })
 
 export class MainService {
 
     static async login(email: string, password: string) {
+        console.log('login checkpoint 1')
+        
         return await client.request({
             url: '/user/login',
             method: 'post',
@@ -36,12 +38,34 @@ export class MainService {
         })
     }
 
+    static async deleteUser(email: string) {
+        return await client.request({
+            url: '/user/delete',
+            method: 'put',
+            data: {
+                email: email
+            }
+        })
+    }
+
+    static async createNewSpot(location: string, name: string, description: string = '', email: string) {
+        
+        return await this.useAxios('/spot/create', 'post', {
+                name: name,
+                location: location,
+                description: description
+            }
+        )
+    }
+
     static async useAxios<T>(url: string, method: 'get' | 'post' | 'put' | 'delete' = 'get', data: any = {}) {
         
+        console.log(url)
 
         let rsp: AxiosResponse
 
         try {
+            console.log("login checkpoint 2")
             rsp = await client.request<T>({
                 url: url,
                 method: method,
@@ -58,7 +82,7 @@ export class MainService {
             throw new Error('BACKEND_BROKE')
         }
 
-        if (rsp.status == 403) {
+        if (rsp.status == 403 || rsp.status == 401) {
             try {
                 const tokenRequest = await client.request({
                     url: '/user/refresh',

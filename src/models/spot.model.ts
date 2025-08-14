@@ -1,9 +1,9 @@
 export interface SpotModel {
-    id: number,
+    spotId: number,
     name: string,
     location: string,
     description: string,
-    added_by: number | null,
+    addedBy: number | null,
     image: string | null,
-    added_on: string
+    createdAt: string
 }

@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import UserView from '@/views/UserView.vue'
+import NewspotView from '@/views/NewspotView.vue'
+import SpotView from '@/views/SpotView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +32,22 @@ const router = createRouter({
       path: '/user/register',
       name: 'register',
       component: RegisterView,
-    }
+    },
+    {
+      path: '/user/me',
+      name: 'user',
+      component: UserView,
+    },
+    {
+      path: '/spot/createspot',
+      name: 'spot_creation',
+      component: NewspotView,
+    },
+    {
+      path: '/spot/:id',
+      name: 'spot',
+      component: SpotView,
+    },
   ],
 })
 
