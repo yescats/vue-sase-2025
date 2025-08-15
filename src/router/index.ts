@@ -6,6 +6,7 @@ import RegisterView from '../views/RegisterView.vue'
 import UserView from '@/views/UserView.vue'
 import NewspotView from '@/views/NewspotView.vue'
 import SpotView from '@/views/SpotView.vue'
+import ChangeSpotView from '@/views/ChangeSpotView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,6 +48,11 @@ const router = createRouter({
       path: '/spot/:id',
       name: 'spot',
       component: SpotView,
+    },
+    {
+      path: '/spot/:id/change',
+      name: 'spot_change',
+      component: ChangeSpotView,
     },
   ],
 })

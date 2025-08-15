@@ -58,6 +58,14 @@ export class MainService {
         )
     }
 
+    static async redactSpot(name: string, location: string, description: string = '', id: number) {
+        return await this.useAxios('/spot/:id/change', 'post', {
+            name: name,
+            location: location,
+            description: description
+        })
+    }
+
     static async useAxios<T>(url: string, method: 'get' | 'post' | 'put' | 'delete' = 'get', data: any = {}) {
         
         console.log(url)

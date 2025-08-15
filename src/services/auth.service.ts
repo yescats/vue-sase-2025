@@ -36,6 +36,10 @@ export class AuthService {
         return this.getAuth().email
     }
 
+    static getUserId(): number {
+        return this.getAuth().userId
+    }
+
     static removeAuth() {
         localStorage.removeItem(this.STORAGE_KEY)
     }

@@ -15,10 +15,23 @@ const logout = useLogout()
 const id = Number(route.params.id)
 const spot = ref<SpotModel>()
 
+
 if (!AuthService.hasAuth()) {
   router.push('/user/login')
 }
 
+
+function checkId(spot: any, user: number) {
+    console.log("Is this working?")
+    console.log(spot)
+    console.log(user)
+    return spot == user || user == 3
+}
+
+function changeSpot() {
+    console.log(`/spot/${id}/change`)
+    router.push(`/spot/${id}/change`)
+}
 
 SpotService.getSpotByID(id)
     .then(rsp => spot.value = rsp.data)
@@ -44,9 +57,18 @@ SpotService.getSpotByID(id)
                         Located at {{ spot.location }}
                     </li>
                     <li class="list-group-item">
-                        {{ spot.description }}
+                        {{ spot.description ?? "No description was added"}}
                     </li>
-                    
+                    <li class="list-group-item" v-if="checkId(spot.addedBy, AuthService.getUserId())">
+                        <button class="btn btn-primary" @click="changeSpot">
+                            Change Spot?
+                        </button>
+                    </li>
+                    <li class="list-group-item" v-else>
+                        <buttn class="btn btn-primary disabled">
+                            You can't change this spot
+                        </buttn>
+                    </li>
                 </ul>
             </div>
         </div>
