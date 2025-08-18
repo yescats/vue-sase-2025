@@ -2,14 +2,17 @@
 import Navigation from '@/components/Navigation.vue';
 import { useLogout } from '@/hooks/logout.hook';
 import type { SpotModel } from '@/models/spot.model';
+import type { UserModel } from '@/models/user.model';
 import { AuthService } from '@/services/auth.service';
+import { MainService } from '@/services/main.service';
 import { SpotService } from '@/services/spot.service';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const logout = useLogout()
 const spots = ref<SpotModel[]>()
 const allSpots = ref<SpotModel[]>()
+const users = ref<UserModel[]>()
 const router = useRouter()
 
 
@@ -18,6 +21,7 @@ if (!AuthService.hasAuth()) {
 }
 
 const token = AuthService.getAccessToken()
+const userAndIDMap = new Map<number, string>()
 
 
 
@@ -27,10 +31,40 @@ SpotService.getSpots()
       spots.value = rsp.data
   })
   .catch(e => logout(e))
+/*
+MainService.getUsers()
+  .then(rsp => {
+    users.value = rsp.data
+  })
+  .catch(e => logout(e))
 
+setTimeout(() => {
+  for (const u of users.value!) userAndIDMap.set(u.userId, u.name)
+}, 200)
+
+*/
+
+onMounted(async () => {
+  try {
+    const [userRsp] = await Promise.all([
+      MainService.getUsers()
+    ])
+
+
+    for (const u of userRsp.data ?? []) {
+      console.log(u)
+      console.log(u.userId + u.name)
+      userAndIDMap.set(u.userId, u.name)
+    }
+    console.log(userAndIDMap)
+  } catch (e) {
+    console.log("a")
+  }
+})
 
 function doSearch(e: any) {
-  if(allSpots.value == undefined) return
+  
+    if(allSpots.value == undefined) return
 
   const input = e.target.value ? e.target.value.toLowerCase() : ''
 
@@ -42,6 +76,7 @@ function doSearch(e: any) {
     return f.name.toLowerCase().includes(input) ||
       f.location.toLowerCase().includes(input)
   })
+  
 }
 
 
@@ -68,7 +103,7 @@ function goToSpot(id: number) {
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <p>Added by {{ s.addedBy ?? "unknown"}}</p>
+            <p>Added by {{ userAndIDMap.get(s.addedBy!) ?? "unknown"}} </p>
           </li>
           <li class="list-group-item">
             <RouterLink :to="`/spot/${s.spotId}`" class="btn btn-sm btn-primary">

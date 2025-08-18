@@ -65,9 +65,9 @@ SpotService.getSpotByID(id)
                         </button>
                     </li>
                     <li class="list-group-item" v-else>
-                        <buttn class="btn btn-primary disabled">
+                        <button class="btn btn-primary disabled">
                             You can't change this spot
-                        </buttn>
+                        </button>
                     </li>
                 </ul>
             </div>

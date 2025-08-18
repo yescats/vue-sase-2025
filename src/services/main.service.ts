@@ -1,5 +1,6 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
 import { AuthService } from "./auth.service";
+import type { UserModel } from "@/models/user.model";
 
 const client = axios.create({
     baseURL: 'http://localhost:5000/api',
@@ -12,6 +13,10 @@ const client = axios.create({
 })
 
 export class MainService {
+
+    static async getUsers() {
+        return await this.useAxios<UserModel[]>('/user', 'get')
+    }
 
     static async login(email: string, password: string) {
         console.log('login checkpoint 1')

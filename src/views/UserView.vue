@@ -32,6 +32,9 @@ function doDelete() {
 function goToSpotCreate() {
     router.push('/spot/createspot')
 }
+function goToUserRedact() {
+    router.push('/user/redact')
+}
 
 </script>
 
@@ -47,6 +50,8 @@ function goToSpotCreate() {
 
 
     <button id="delete" class="btn btn-primary btn-block" @click="deleteMsg()">Delete Account?</button>
+
+    <button class="btn btn-primary btn-block" @click="goToUserRedact()">Change user information</button>
 
     <div v-if="showConfirm">
         <p>Are you sure you want to delete your account?</p>
