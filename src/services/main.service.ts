@@ -64,7 +64,7 @@ export class MainService {
     }
 
     static async redactSpot(name: string, location: string, description: string = '', id: number) {
-        return await this.useAxios('/spot/:id/change', 'post', {
+        return await this.useAxios(`/spot/${id}/change`, 'post', {
             name: name,
             location: location,
             description: description

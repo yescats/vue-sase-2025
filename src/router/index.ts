@@ -46,14 +46,14 @@ const router = createRouter({
       component: NewspotView,
     },
     {
-      path: '/spot/:id',
-      name: 'spot',
-      component: SpotView,
-    },
-    {
       path: '/spot/:id/change',
       name: 'spot_change',
       component: ChangeSpotView,
+    },
+    {
+      path: '/spot/:id',
+      name: 'spot',
+      component: SpotView,
     },
     {
       path: '/user/redact',

@@ -23,9 +23,9 @@ SpotService.getSpotByID(id)
     .catch(e => alert("couldn't find spot"))
 
 
-const name = ref<string>(spot.value!.name)
-const location = ref<string>(spot.value!.location)
-const description = ref<string>(spot.value!.description)
+const name = ref<string>('')
+const location = ref<string>('')
+const description = ref<string>('')
 
 function redact(e: Event) {
     e.preventDefault()
@@ -44,13 +44,14 @@ function redact(e: Event) {
     <Navigation />
     <div class="card-body">
         <div class="text-center">
-            <h2>Create a new spot</h2>
+            <h2>Redact the spot</h2>
             <p>SASE project?</p>
+            
         </div>
         <form @submit.prevent="e => redact(e)">
             <div class="mb-3">
                 <label for="name" class="form-label">SPot name</label>
-                <input type="name" class="form-control" id="name" v-model="name">
+                <input type="name" class="form-control" id="name" placeholder=""  v-model="name">
             </div>
             <div class="mb-3">
                 <label for="location" class="form-label">WHere is it?</label>
