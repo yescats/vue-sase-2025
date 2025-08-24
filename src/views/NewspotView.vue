@@ -33,7 +33,6 @@ function create(e: Event) {
         if (isNavigationFailure(failure)) {
             console.warn('Navigation failed:', failure)
         } else {
-            console.log('Navigated to /')
         }
         })
         .catch(e => alert('Something went wrong...'))

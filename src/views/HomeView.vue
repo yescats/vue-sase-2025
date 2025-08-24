@@ -28,7 +28,7 @@ const userAndIDMap = new Map<number, string>()
 SpotService.getSpots()
   .then(rsp => {
       allSpots.value = rsp.data
-      spots.value = rsp.data
+      //spots.value = rsp.data
   })
   .catch(e => logout(e))
 /*
@@ -52,13 +52,9 @@ onMounted(async () => {
 
 
     for (const u of userRsp.data ?? []) {
-      console.log(u)
-      console.log(u.userId + u.name)
       userAndIDMap.set(u.userId, u.name)
     }
-    console.log(userAndIDMap)
   } catch (e) {
-    console.log("a")
   }
 })
 
@@ -81,7 +77,6 @@ function doSearch(e: any) {
 
 
 function goToSpot(id: number) {
-  console.log(id)
   router.push(`/spot/${id}`)
 }
 
@@ -91,9 +86,8 @@ function goToSpot(id: number) {
   <Navigation />
     <div class="input-group mb-3 search">
       <span class="input-group-text" id="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
       </span>
-      <input type="text" class="form-control" aria-describedby="search" placeholder="Name, Location" @keyup="(e) => doSearch(e)"></input>
+      <input type="text" class="form-control" aria-describedby="search" placeholder="Name, Location. Try searching for something" @keyup="(e) => doSearch(e)"></input>
     </div>
     <div class="wrapper mb-3" v-if="spots">
       <div class="card spot-card" v-for="s in spots" :key="s.spotId">

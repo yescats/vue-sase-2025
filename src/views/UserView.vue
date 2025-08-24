@@ -17,7 +17,6 @@ const logout = useLogout()
 const showConfirm = ref(false)
 
 function deleteMsg() {
-    console.log("shfsdhf")
     showConfirm.value = true
 }
 

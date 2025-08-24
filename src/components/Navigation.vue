@@ -11,7 +11,7 @@ const logout = useLogout()
     <nav class="navbar navbar-expand-lg bg-body-tertiary mb-3">
         <div class="container">
             <a class="navbar-brand">
-                <i class="fa-solid fa-campground"></i> YEY
+                UrbEx
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -23,25 +23,25 @@ const logout = useLogout()
                     <template v-if="AuthService.hasAuth()">
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/">
-                                <i class="fa-solid fa-house"></i> Home
+                                Home
                             </RouterLink>
                         </li>
                         <li class="nav-item">
-                            <button type="button" class="nav-link" @click="logout(null)">
-                                <i class="fa-solid fa-right-from-bracket"></i> Logout
-                            </button>
+                            <RouterLink class="nav-link" @click="logout(null)" to="/user/login">
+                                Logout
+                            </RouterLink>
                         </li>
                     </template>
                     <template v-else>
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/user/login">
-                                <i class="fa-solid fa-right-to-bracket"></i> Login
+                                Login
                             </RouterLink>
                         </li>
                     </template>
                     <li class="nav-item">
                         <RouterLink class="nav-link" to="/about">
-                            <i class="fa-solid fa-circle-info"></i> About
+                            About
                         </RouterLink>
                     </li>
                 </ul>

@@ -18,8 +18,11 @@ export class MainService {
         return await this.useAxios<UserModel[]>('/user', 'get')
     }
 
+    static async getUserById(id: number) {
+        return await this.useAxios<UserModel>(`/user/${id}`, 'get')
+    }
+
     static async login(email: string, password: string) {
-        console.log('login checkpoint 1')
         
         return await client.request({
             url: '/user/login',
@@ -71,14 +74,16 @@ export class MainService {
         })
     }
 
+    static async deleteSpot(id: number) {
+        return await this.useAxios('/spot/delete', 'put', {id})
+    }
+
     static async useAxios<T>(url: string, method: 'get' | 'post' | 'put' | 'delete' = 'get', data: any = {}) {
         
-        console.log(url)
 
         let rsp: AxiosResponse
 
         try {
-            console.log("login checkpoint 2")
             rsp = await client.request<T>({
                 url: url,
                 method: method,

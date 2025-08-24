@@ -9,4 +9,5 @@ export class SpotService {
     static async getSpotByID(id: number) {
         return await MainService.useAxios<SpotModel>(`/spot/${id}`)
     }
+    
 }

@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation.vue';
 import { useLogout } from '@/hooks/logout.hook';
 import type { SpotModel } from '@/models/spot.model';
 import { AuthService } from '@/services/auth.service';
+import { MainService } from '@/services/main.service';
 import { SpotService } from '@/services/spot.service';
 import { formatTime } from '@/utils';
 import { ref } from 'vue';
@@ -22,15 +23,16 @@ if (!AuthService.hasAuth()) {
 
 
 function checkId(spot: any, user: number) {
-    console.log("Is this working?")
-    console.log(spot)
-    console.log(user)
     return spot == user || user == 3
 }
 
 function changeSpot() {
-    console.log(`/spot/${id}/change`)
     router.push(`/spot/${id}/change`)
+}
+
+function deleteSpot() {
+    MainService.deleteSpot(id)
+    router.push('/')
 }
 
 SpotService.getSpotByID(id)
@@ -48,15 +50,14 @@ SpotService.getSpotByID(id)
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        Added by: {{ spot.addedBy }}
-                    </li>
-                    <li class="list-group-item">
                         Added on: {{ formatTime(spot.createdAt) }}
                     </li>
                     <li class="list-group-item">
                         Located at {{ spot.location }}
                     </li>
                     <li class="list-group-item">
+                        <p>Description:</p>
+                        
                         {{ spot.description ?? "No description was added"}}
                     </li>
                     <li class="list-group-item" v-if="checkId(spot.addedBy, AuthService.getUserId())">
@@ -67,6 +68,16 @@ SpotService.getSpotByID(id)
                     <li class="list-group-item" v-else>
                         <button class="btn btn-primary disabled">
                             You can't change this spot
+                        </button>
+                    </li>
+                    <li class="list-group-item" v-if="checkId(spot.addedBy, AuthService.getUserId())">
+                        <button class="btn btn-primary" @click="deleteSpot">
+                            Delete Spot?
+                        </button>
+                    </li>
+                    <li class="list-group-item" v-else>
+                        <button class="btn btn-primary disabled">
+                            You can't delete this spot
                         </button>
                     </li>
                 </ul>

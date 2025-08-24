@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation.vue'
 <template>
   <Navigation />
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>This site is displaying urban exploration spots. You can add your own spots for others to visit as well</h1>
   </div>
 </template>
 
