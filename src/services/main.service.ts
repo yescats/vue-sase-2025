@@ -3,7 +3,7 @@ import { AuthService } from "./auth.service";
 import type { UserModel } from "@/models/user.model";
 
 const client = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'https://localhost:5000/api',
     headers: {
         'Accept': 'application/json'
     },
